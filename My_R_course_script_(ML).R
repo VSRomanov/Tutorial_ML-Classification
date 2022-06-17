@@ -19,7 +19,7 @@ setwd("/home/vasilyromanov/Documents/R course/ML_part/Plots")
 
 ########################  'iris' dataset  ###########################################################################
 
-# Have a look at the data and get some basic stats
+## Have a look at the data and get some basic stats
 # load in the iris data
 data(iris)
 # how does the data look? how many rows, columns?
@@ -35,15 +35,14 @@ set.seed(7)
 iris <- iris[sample(1:nrow(iris), size = nrow(iris), replace = F),]
 head(iris, 20)
 
-# assign a unique identifier to each sample,
-# that is the row name so we can keep track of each sample
+# assign a unique identifier to each sample that is the row name so we can keep track of each sample
 iris$ID <- as.character(rownames(iris))
-# load the "caret" package ( short for Classification And REgression Training)
-# contains functions for supervised ML
+# load the "caret" package (short for Classification And REgression Training), which contains functions for supervised ML
 library(caret)
+
 # plot a boxplot and a density histogram of the iris data for each species
 scales <- list(x=list(relation="free"), y=list(relation="free"))
-png( filename = "featurePlot_Box.png", width = 15, height = 10, units = "cm", res = 300)
+png(filename = "featurePlot_Box.png", width = 15, height = 10, units = "cm", res = 300)
 featurePlot(x=iris[,1:4], y=iris$Species, plot = "box", scales = scales)
 dev.off()
 png(filename = "featurePlot_Density.png", width = 15, height = 15, units = "cm", res = 300)
@@ -86,11 +85,11 @@ library(factoextra)
 
 ### PCA
 pca <- prcomp(data[,1:4], center = T, scale. = T)
-# what kind of objects is pca?
+# what kind of objects is 'pca'?
 class(pca)
 is.list(pca)
 
-# get the variances explained by each PC
+# get the variances explained by each principal component
 png(filename = "Scree.Plot.png", width = 12, height = 12, units = "cm", res = 300)
 fviz_eig(pca, addlabels = T)
 dev.off()
@@ -121,7 +120,7 @@ sampleTree <- hclust(dist(data[,1:4]), method = "mcquitty")
 library(ggdendro)
 # First generate a simple tree
 dendr <- ggdendrogram(sampleTree, labels = F, xlab=F)
-# extract the data from the hclust object
+# extract the data from the 'hclust' object
 ddata_x <- dendro_data(sampleTree)
 labs <- label(ddata_x)
 # get each ID in the tree
@@ -154,7 +153,6 @@ irisTrain <- iris[training_indices,]
 irisTest <- iris[-training_indices,]
 
 
-# now we do the supervised ML
 # specify some important parameters/settings for the ML
 control <- trainControl(method = "repeatedcv", number = 10, repeats = 3,
                         summaryFunction = multiClassSummary, classProbs = T, savePredictions = T)
@@ -173,7 +171,6 @@ set.seed(7)
 fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "knn", metric = metric,
                  trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
 # Decision Tree
-# a very nice feature of decisions tress is that the decisions of the machine can be followed up easily
 set.seed(7)
 fit.cart <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "rpart", metric = metric,
                   trControl = control, tuneLength = 10, preProcess = c("center","scale"))
@@ -195,14 +192,15 @@ fit.svm_Rad <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "svmRadial", m
 set.seed(7)
 fit.rf <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "rf", metric = metric,
                 trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
-# run nnet
+
+# Neural Networks
 set.seed(7)
 fit.nnet <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "nnet", metric = metric,
                   trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
 
 
 
-## summarize ML performance
+## Summarize ML performance
 results <- resamples(list(lda=fit.lda, knn=fit.knn, svm_Lin=fit.svm_Lin, svm_Rad=fit.svm_Rad, rf=fit.rf,
                           cart=fit.cart, nnet=fit.nnet))
 summary(results)
@@ -227,7 +225,7 @@ confusionMatrix(predictions, irisTest$Species)
 
 
 ### Feature importance
-# How important are the individual features for the machine
+# How important are the individual features for the Machine?
 gbmImp <- varImp(fit.lda, scale = T)
 png(filename = "Iris_ML_FeatImp.png", width = 10, height = 10, units = "cm",
     res = 300)
@@ -252,19 +250,17 @@ str(GermanCredit)
 all_features <- colnames(GermanCredit[,colnames(GermanCredit) != "Class"])
 
 
-# shuffle the data to get rid of any patterns
-# that might come from e.g. data acquisition
+# shuffle the data to get rid of any patterns that might come from e.g. data acquisition
 set.seed(7)
 GermanCredit <- GermanCredit[sample(1:nrow(GermanCredit), size = nrow(GermanCredit), replace = F),]
 head(GermanCredit, 20)
 
-# assign a unique identifier to each sample,
-# that is the row name so we can keep track of each sample
+# assign a unique identifier to each sample that is the row name so we can keep track of each sample
 GermanCredit$ID <- as.character(rownames(GermanCredit))
 
 # plot a boxplot and a density histogram of the GermanCredit data for each species
 scales <- list(x=list(relation="free"), y=list(relation="free"))
-png( filename = "featurePlot_Box_GermanCredit.png", width = 15, height = 10, units = "cm", res = 300)
+png(filename = "featurePlot_Box_GermanCredit.png", width = 15, height = 10, units = "cm", res = 300)
 featurePlot(x=GermanCredit[,c("Duration", "Amount", "Age", "CheckingAccountStatus.none",
                               "CheckingAccountStatus.0.to.200",
                               "CheckingAccountStatus.lt.0")], y=GermanCredit$Class, plot = "box", scales = scales,
@@ -301,7 +297,7 @@ nz_var <- caret::nearZeroVar(GerCredTrain[,all_features], names = TRUE)
 selected_features <- all_features[! all_features %in% nz_var]
 
 
-## Removing highly correlated features (Pearson coef. > 0.7)
+## Removing highly correlated features (Pearson coefficient > 0.7)
 cat("Removing highly correlated features (Pearson coef. > 0.7)\n")
 descrCor <- cor(GerCredTrain[, selected_features], method = "pearson")
 highlyCorDescr <- caret::findCorrelation(descrCor, cutoff = .7, exact = TRUE, names = TRUE)
@@ -323,7 +319,7 @@ selected_features <- rfProfile$optVariables
 
 
 ### PCA (just for the figure)
-# Note: 'selected_features' are used in oder to avoid the error
+# Note: 'selected_features' are used in order to avoid the error
 pca.GC <- prcomp(GermanCredit[,selected_features], center = T, scale. = T)
 
 # get the variances explained by each PC
@@ -374,7 +370,8 @@ fit.svm_Rad.GC <- train(x=GerCredTrain[,selected_features], y=GerCredTrain$Class
 set.seed(7)
 fit.rf.GC <- train(x=GerCredTrain[,selected_features], y=GerCredTrain$Class, method = "rf", metric = metric,
                    trControl = control.GC, tuneLength = 10, preProcess = c("center", "scale"))
-# run nnet
+
+# Neural Networks
 set.seed(7)
 fit.nnet.GC <- train(x=GerCredTrain[,selected_features], y=GerCredTrain$Class, method = "nnet", metric = metric,
                      trControl = control.GC, tuneLength = 10, preProcess = c("center", "scale"))
