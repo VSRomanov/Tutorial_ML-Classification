@@ -31,3 +31,38 @@ There are two basic types of ML: supervised and unsupervised. Unsupervised ML di
 *Random forest (RF)*: A set of decision trees each calculated using a bootstrapped dataset and a random subset of features at each decision step. The variety is what makes RF more effective than individual decision tress. For classification, the data is passed through all the created trees. The class label is assigned to the one with the most votes. (see: [short video](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ))
 
 *Artificial neural network (ANN)*: An ANN is based on a collection of connected nodes called neurons. The neurons are connected via channels and are grouped in different layers. The input layer receives the input, the output layer predicts the output and the hidden layers between them perform the main part of the calculation. Within the training phase the weights assigned to the channels are adjusted to improve the prediction of the output layer. For classification, the data is propagated through the neural net using the weights and functions calculated in the training phase. The class label is assigned to the one with highest score (probability) in the output layer. (see: [short video 1](https://www.youtube.com/watch?v=bfmFfD2RIcg); [short video 2](https://www.youtube.com/watch?v=aircAruvnKk))
+
+## Practical Part
+
+**Objective**
+
+We will try to build a classifier separating different iris species according to their sepal and petal features (length and width).
+
+[Irises](iris_species.png)
+
+Libraries
+Make sure that the packages below are installed. If not, you can install these packages with the following commands.
+```
+install.packages("caret", dependencies = TRUE)
+install.packages("ggplot2", dependencies = TRUE)
+install.packages("grid", dependencies = TRUE)
+install.packages("gridExtra", dependencies = TRUE)
+install.packages("factoextra", dependencies = TRUE)
+install.packages("ggdendro", dependencies = TRUE)
+install.packages("rpart.plot", dependencies = TRUE)	
+```
+
+We will use a powerful ‘caret’ package (short for Classification And REgression Training), which contains functions for supervised ML.
+Import it:
+```
+library(caret)
+```
+Set the working directory, where will be saved output figures
+```
+setwd(" … <<a path to the newly created folder>> … ")
+```
+
+Load the iris data
+```
+data(iris)
+```
