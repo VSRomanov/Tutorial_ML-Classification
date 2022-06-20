@@ -38,7 +38,7 @@ There are two basic types of ML: supervised and unsupervised. Unsupervised ML di
 
 We will try to build a classifier separating different iris species according to their sepal and petal features (length and width).
 
-[Irises](iris_species.png)
+![Irises](iris_species.png)
 
 Libraries
 Make sure that the packages below are installed. If not, you can install these packages with the following commands.
