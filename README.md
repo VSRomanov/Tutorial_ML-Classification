@@ -1,0 +1,33 @@
+
+# Practical Tutorial: Classification with Machine Lerning
+ 
+For those interested in Machine Learning, and especially in one of its most common applications, Classification, here is a practical guide that I think many of you will find useful. It was created during my stay in [Prof. Rainer König lab](https://www.uniklinikum-jena.de/infektionsmedizin/Forschung/Modelling.html) and represents my updated version of the lab's tutorial for the annual R course. My solution for the tasks is provided as an attached .R file. Enjoy!
+
+
+## Introduction
+*Definition*: [Machine Learning (ML)](https://en.wikipedia.org/wiki/Machine_learning) is the study of computer algorithms that can improve automatically through experience and by the use of data. It is seen as a part of Artificial Intelligence (AI). ML algorithms build a model based on sample data, known as training data, in order to make predictions or decisions without being explicitly programmed to do so. ML algorithms are used in a wide variety of applications, such as in medicine, email filtering, speech recognition, computer vision, etc., where it is difficult or unfeasible to develop conventional algorithms to perform the needed tasks.
+
+The major application is [*Classification*](https://en.wikipedia.org/wiki/Statistical_classification).
+
+There are two basic types of ML: supervised and unsupervised. Unsupervised ML discover patterns of data similarity, whereas algorithms of supervised ML train and optimize Machines on a subset of data with known class labels in order to predict class of the new unlabeled data.
+
+
+**Unsupervised Machine Learning** 
+
+*Clustering*: Basically, clustering is about grouping objects/data systematically using similarity ("distance") measures (further information see: [short video](https://www.youtube.com/watch?v=QXOkPvFM6NU) and my [Practical Tutorial: Clustering](link)) 
+
+*Principal component analysis (PCA)*: used for dimensionality reduction by projecting each data point onto only the first few principal components to obtain lower-dimensional data while preserving as much of the data's variation as possible (further information see: [short video](https://www.youtube.com/watch?v=FgakZw6K1QQ))
+
+**Supervised Machine Learning** 
+
+*k-nearest neighbours algorithm (k-NN)*: The algorithm evaluates similarity between the new observation and available cases, and assigns the new datapoint to the class/category that is most similar to the available categories of the 'k' nearest cases. The choice of number 'k' is crucial for the quality of the results. (see: [short video](https://www.youtube.com/watch?v=HVXime0nQeI))
+
+*Linear discriminant analysis (LDA)*: LDA aims to find a linear combination of features that characterizes or separates two (or more) classes of objects/observations. Therefore, it reduces dimensions systematically. (see: [short video](https://www.youtube.com/watch?v=azXCzI57Yfc))
+
+*Support vector machine (SVM)*: SVM maps training examples to points in space and constructs a hyperplane so that the distance from it to the nearest data point on each side is maximized. A good separation is achieved by the hyperplane that has the largest distance to the nearest training-data point of any class. Kernel trick: the method maps a non-linear separable data into a higher dimensional space, making the data linearly separable. (see: [short video](https://www.youtube.com/watch?v=efR1C6CvhmE))
+
+*Decision tree (DT)*: Structure in which each internal node represents a "test" on a feature (e.g. Petal Width > 1), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after testing all corresponding features). The paths from root to leaf represent classification rules. (see: [short video](https://www.youtube.com/watch?v=7VeUPuFGJHk))
+
+*Random forest (RF)*: A set of decision trees each calculated using a bootstrapped dataset and a random subset of features at each decision step. The variety is what makes RF more effective than individual decision tress. For classification, the data is passed through all the created trees. The class label is assigned to the one with the most votes. (see: [short video](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ))
+
+*Artificial neural network (ANN)*: An ANN is based on a collection of connected nodes called neurons. The neurons are connected via channels and are grouped in different layers. The input layer receives the input, the output layer predicts the output and the hidden layers between them perform the main part of the calculation. Within the training phase the weights assigned to the channels are adjusted to improve the prediction of the output layer. For classification, the data is propagated through the neural net using the weights and functions calculated in the training phase. The class label is assigned to the one with highest score (probability) in the output layer. (see: [short video 1](https://www.youtube.com/watch?v=bfmFfD2RIcg); [short video 2](https://www.youtube.com/watch?v=aircAruvnKk))
