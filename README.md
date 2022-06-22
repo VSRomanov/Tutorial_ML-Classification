@@ -42,13 +42,13 @@ We will try to build a classifier separating different iris species according to
 
 **Import**
 
-Make sure that the packages "caret", "ggplot2", "grid", "gridExtra", "factoextra", "ggdendro" and "rpart.plot" are installed. If not, you can install these packages with the following command:
+Make sure that the packages "caret", "ggplot2", "grid", "gridExtra", "factoextra", "ggdendro" and "rpart.plot" are installed. If not, you can install these packages with the function 'install.packages()':
 ```
 install.packages("caret", dependencies = TRUE)
 ```
 
 We will use a powerful "caret" package (short for Classification And REgression Training), which contains functions for supervised ML.
-We will also need some packages for plotting. Import all of them with the command:
+We will also need some packages for plotting. Import all of them with the function 'library()':
 ```
 library(caret)
 ```
@@ -118,7 +118,7 @@ dim(irisWithoutClassLabel)
 data_unsup <- as.data.frame(rbind(irisWithClassLabel, irisWithoutClassLabel))
 ```
 
-We will use two unsupervised ML: PCA and clustering.
+We will use two unsupervised ML approaches: PCA and clustering.
 
 ***PCA***
 ```
@@ -152,7 +152,8 @@ df_out$Species <- as.character(data_unsup[,5])
 Plot the PCA results:
 ```
 p1 <- ggplot(df_out, aes(x=PC1, y=PC2, color=Species, label=rownames(df_out))) +
-  geom_point() + geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
+  geom_point() +
+  geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
   theme_bw()
 
 p2 <- … <<x=PC1, y=PC3>> …
@@ -167,8 +168,7 @@ pFin <- grid.arrange(p1,p2,p3, ncol=2)
 
 Save PCA plot as .png file:
 ```
-ggsave(pFin, filename = "PCA.png", device = "png", dpi = 600, width = 30, height = 30,
- units = "cm")
+ggsave(pFin, filename = "PCA.png", device = "png", dpi = 600, width = 30, height = 30, units = "cm")
 ```
 
 ***Clustering***
@@ -179,30 +179,24 @@ sampleTree <- hclust(dist(data_unsup[,1:4]), method = "mcquitty")
 dendr <- ggdendro::ggdendrogram(sampleTree, labels = F, xlab=F)
 ```
 
-Extract the data from the hclust object:
+Extract data from the 'hclust' object:
 ```
 ddata_x <- dendro_data(sampleTree)
 labs <- label(ddata_x)
 ```
 
-Get each ID in the tree:
+Get each ID in the tree and find its position in the original data:
 ```
 ID <- as.numeric(as.character(labs$label))
-```
-
-Find position of each ID in the original data:
-```
 Pos <- sapply(as.character(ID), function(x)which(x==as.character(data_unsup$ID)))
 ```
 
-Assign for each sample the corresponding iris species as color:
+Assign for each sample the colorcoded iris species:
 ```
-Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0,
-color= data_unsup$Species[Pos], angle = 45, hjust=1))
+Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0, color= data_unsup$Species[Pos], angle = 45, hjust=1))
 ```
 
 Save as .png file:
 ```
-ggsave(Dendro, filename = "Dendo.png", device = "png", dpi = 600, width = 40,
-height = 20, units = "cm")
+ggsave(Dendro, filename = "Dendo.png", device = "png", dpi = 600, width = 40, height = 20, units = "cm")
 ```
