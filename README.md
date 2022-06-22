@@ -40,29 +40,169 @@ We will try to build a classifier separating different iris species according to
 
 ![Irises](iris_species.png)
 
-Libraries
-Make sure that the packages below are installed. If not, you can install these packages with the following commands.
+**Import**
+
+Make sure that the packages "caret", "ggplot2", "grid", "gridExtra", "factoextra", "ggdendro" and "rpart.plot" are installed. If not, you can install these packages with the following command:
 ```
 install.packages("caret", dependencies = TRUE)
-install.packages("ggplot2", dependencies = TRUE)
-install.packages("grid", dependencies = TRUE)
-install.packages("gridExtra", dependencies = TRUE)
-install.packages("factoextra", dependencies = TRUE)
-install.packages("ggdendro", dependencies = TRUE)
-install.packages("rpart.plot", dependencies = TRUE)	
 ```
 
-We will use a powerful ‘caret’ package (short for Classification And REgression Training), which contains functions for supervised ML.
-Import it:
+We will use a powerful "caret" package (short for Classification And REgression Training), which contains functions for supervised ML.
+We will also need some packages for plotting. Import all of them with the command:
 ```
 library(caret)
 ```
-Set the working directory, where will be saved output figures
+
+Set the working directory, where will be saved output figures:
 ```
 setwd(" … <<a path to the newly created folder>> … ")
 ```
 
-Load the iris data
+Load the iris dataset:
 ```
 data(iris)
+```
+
+Inspect the data and get some basic stats.
+How does the data look? How many rows, columns?
+Try commands 'head()', 'tail()', 'dim()', 'summary()', 'str()'
+
+
+Shuffle the data to get rid of any patterns, that might come from e.g. data acquisition.
+Note: 'setseed()' function ensures that we get the same result each time we run the code.
+You can choose any integer:
+```
+set.seed(7)
+iris <- iris[sample(1:nrow(iris), size = nrow(iris), replace = F),]
+head(iris, 20)
+```
+
+Assign a unique identifier to each sample, that is the row name, so we can keep track of each sample:
+```
+iris$ID <- as.character(rownames(iris))	
+```
+
+Plot a boxplot and a density histogram of the iris data for each species. Save them as .png files:
+```
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+
+png(filename = "featurePlot_Box.png", width = 15, height = 15, units = "cm", res = 300)
+featurePlot(x=iris[,1:4], y=iris$Species, plot = "box", scales = scales, par.strip.text=list(cex=0.6))
+dev.off()
+
+png(filename = "featurePlot_Density.png", width = … <<set the arguments the same as above, plus this one more:>> …, auto.key=list(columns=3))
+dev.off()
+```
+
+**Unsupervised classification**
+
+In order to test and see how good our classification performs, we will mask the species labels in 30% of the data.
+Split the dataset 70/30:
+```
+set.seed(9)
+indices <- createDataPartition(iris$Species, p=0.7, list = F)
+```
+
+70% of the data with class labels:
+```
+irisWithClassLabel <- iris[indices,]
+dim(irisWithClassLabel)
+```
+
+Now let’s mask the species labels for the remaining 30% of data, so we assume these are samples where we do not know the species:
+```
+irisWithoutClassLabel <- iris[-indices,]
+irisWithoutClassLabel$Species <- "unknown"
+dim(irisWithoutClassLabel)
+
+data_unsup <- as.data.frame(rbind(irisWithClassLabel, irisWithoutClassLabel))
+```
+
+We will use two unsupervised ML: PCA and clustering.
+
+***PCA***
+```
+pca <- prcomp(data_unsup[,1:4], center = T, scale. = T) 
+```
+
+What kind of objects is 'pca'?
+```
+class(pca)
+is.list(pca) 
+```
+
+Get the variances explained by each principal component and save the plot as a .png file:
+```
+png(filename = "Scree.Plot.png", width = 12, height = 12, units = "cm", res = 300)
+factoextra::fviz_eig(pca, addlabels = T)
+dev.off() 
+```
+
+Get the PCA results:
+```
+df_out <- as.data.frame(pca$x)
+head(df_out) 
+```
+
+Assign species label:
+```
+df_out$Species <- as.character(data_unsup[,5])
+```
+
+Plot the PCA results:
+```
+p1 <- ggplot(df_out, aes(x=PC1, y=PC2, color=Species, label=rownames(df_out))) +
+  geom_point() + geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
+  theme_bw()
+
+p2 <- … <<x=PC1, y=PC3>> …
+
+p3 <- … <<x=PC2, y=PC3>> …
+```
+
+Combine the three plots to one:
+```
+pFin <- grid.arrange(p1,p2,p3, ncol=2)
+```
+
+Save PCA plot as .png file:
+```
+ggsave(pFin, filename = "PCA.png", device = "png", dpi = 600, width = 30, height = 30,
+ units = "cm")
+```
+
+***Clustering***
+
+Generate a simple tree:
+```
+sampleTree <- hclust(dist(data_unsup[,1:4]), method = "mcquitty")
+dendr <- ggdendro::ggdendrogram(sampleTree, labels = F, xlab=F)
+```
+
+Extract the data from the hclust object:
+```
+ddata_x <- dendro_data(sampleTree)
+labs <- label(ddata_x)
+```
+
+Get each ID in the tree:
+```
+ID <- as.numeric(as.character(labs$label))
+```
+
+Find position of each ID in the original data:
+```
+Pos <- sapply(as.character(ID), function(x)which(x==as.character(data_unsup$ID)))
+```
+
+Assign for each sample the corresponding iris species as color:
+```
+Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0,
+color= data_unsup$Species[Pos], angle = 45, hjust=1))
+```
+
+Save as .png file:
+```
+ggsave(Dendro, filename = "Dendo.png", device = "png", dpi = 600, width = 40,
+height = 20, units = "cm")
 ```
