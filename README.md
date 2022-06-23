@@ -9,7 +9,7 @@ For those interested in machine learning, and especially in one of its most comm
 
 The major application is [*classification*](https://en.wikipedia.org/wiki/Statistical_classification).
 
-There are two basic types of ML: supervised and unsupervised. Unsupervised ML discover patterns of data similarity, whereas algorithms of supervised ML train and optimize Machines on a subset of data with known class labels in order to predict class of the new unlabeled data.
+There are two basic types of ML: *supervised* and *unsupervised*. Unsupervised ML discover patterns of data similarity, whereas algorithms of supervised ML train and optimize Machines on a subset of data with known class labels in order to predict class of the new unlabeled data.
 
 
 **Unsupervised Machine Learning** 
@@ -36,7 +36,8 @@ There are two basic types of ML: supervised and unsupervised. Unsupervised ML di
 
 **Objective**
 
-We will try to build a classifier separating different iris species according to their sepal and petal features (length and width).
+We will try to build a classifier separating different iris species (*setosa*, *versicolor*, *virginica*)
+according to their sepal and petal features (length and width).
 
 ![Irises](iris_species.png)
 
@@ -173,13 +174,13 @@ ggsave(pFin, filename = "PCA.png", device = "png", dpi = 600, width = 30, height
 
 ***Clustering***
 
-Generate a simple tree:
+We will try *hierarchical* clustering. First, generate a dendrogram:
 ```r
 sampleTree <- hclust(dist(data_unsup[,1:4]), method = "mcquitty")
 dendr <- ggdendro::ggdendrogram(sampleTree, labels = F, xlab=F)
 ```
 
-Extract data from the 'sampleTree' object:
+Extract data from the 'sampleTree' object (class 'hclust'):
 ```r
 ddata_x <- dendro_data(sampleTree)
 labs <- label(ddata_x)
@@ -198,7 +199,7 @@ Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0, co
 
 Save as .png file:
 ```r
-ggsave(Dendro, filename = "Dendo.png", device = "png", dpi = 600, width = 40, height = 20, units = "cm")
+ggsave(Dendro, filename = "Dendro.png", device = "png", dpi = 600, width = 40, height = 20, units = "cm")
 ```
 
 **Supervised Classification**
@@ -216,6 +217,7 @@ In order to test how good our classification performs,
 we will split the data in 70% and 30%, train with 70% of the data and test with the other 30%:
 ```r
 set.seed(9)
+
 training_indices <- createDataPartition(iris$Species, p=0.7, list = F)
 irisTrain <- iris[training_indices,]
 irisTest <- iris[-training_indices,]
@@ -230,11 +232,12 @@ metric <- "Balanced_Accuracy"
 
 Training the machines:
 ```r
+set.seed(7)
+
 # k-NN
 fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "knn", metric = metric, trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
 
 # LDA
-set.seed(7)
 fit.lda <- … <<<method = "lda">>> …
 
 # SVM Linear Kernel
