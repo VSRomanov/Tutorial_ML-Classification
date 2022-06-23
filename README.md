@@ -189,7 +189,7 @@ labs <- label(ddata_x)
 Get each ID in the tree and find its position in the original data:
 ```r
 ID <- as.numeric(as.character(labs$label))
-Pos <- sapply(as.character(ID), function(x)which(x==as.character(data_unsup$ID)))
+Pos <- sapply(as.character(ID), function(x) which(x==as.character(data_unsup$ID)))
 ```
 
 Assign for each sample the color-coded iris species:
