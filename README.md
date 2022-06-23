@@ -278,7 +278,7 @@ What is the best model in terms of Balanced Accuracy"?
 Next step: take the best machine and predict outcome for the testing dataset.
 How accurate is it?
 ```r
-predictions <- predict(<<your best machine>>, irisTest[,1:4])
+predictions <- predict(<<<your best machine>>>, irisTest[,1:4])
 
 confusionMatrix(predictions, irisTest$Species)
 ```
@@ -286,7 +286,7 @@ confusionMatrix(predictions, irisTest$Species)
 How important are the individual features for the selected machine?
 Plot the results:
 ```r
-gbmImp <- varImp(<<your best machine>>, scale = T)
+gbmImp <- varImp(<<<your best machine>>>, scale = T)
 
 plot(gbmImp, main="Iris Variable Importance", top=4)
 ```
@@ -298,7 +298,7 @@ OK, you've made it! Now it’s time for your first own ML project. Load the data
 ```r
 data(GermanCredit, package = “caret")
 ```
-Do the ML to identify the class "bad" and "good" (‘Class’ column).
+Do the ML to identify the classes "bad" and "good" (‘Class’ column).
 Use the same settings as before: 70/30 splitting, 10 times repeated cross validation,
 select for the best Balanced Accuracy. What ML algorithm performs best? 
 What are the six most important features for the classification? Please generate the density plots of these.
