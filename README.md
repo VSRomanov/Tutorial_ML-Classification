@@ -43,18 +43,18 @@ We will try to build a classifier separating different iris species according to
 **Import**
 
 Make sure that the packages "caret", "ggplot2", "grid", "gridExtra", "factoextra", "ggdendro" and "rpart.plot" are installed. If not, you can install these packages with the function 'install.packages()':
-```
+```r
 install.packages("caret", dependencies = TRUE)
 ```
 
 We will use a powerful "caret" package (short for Classification And REgression Training), which contains functions for supervised ML.
 We will also need some packages for plotting. Import all of them with the function 'library()':
-```
+``` r
 library(caret)
 ```
 
 Set the working directory, where will be saved output figures:
-```
+``` r
 setwd(" … <<a path to the newly created folder>> … ")
 ```
 
