@@ -1,13 +1,13 @@
 
 # Practical Tutorial: Classification with Machine Learning
  
-For those interested in machine learning, and especially in one of its most common applications, Classification, here is a practical guide that I think many of you will find useful. It was created during my stay in [Prof. Rainer König lab](https://www.uniklinikum-jena.de/infektionsmedizin/Forschung/Modelling.html) and represents my updated version of the lab's tutorial for the annual R course. My solution for the tasks is provided as an attached .R file. Enjoy!
+For those interested in machine learning, and especially in one of its most common applications, classification, here is a practical guide that I think many of you will find useful. It was created during my stay in [Prof. Rainer König lab](https://www.uniklinikum-jena.de/infektionsmedizin/Forschung/Modelling.html) and represents my updated version of the lab's tutorial for the annual R course. My solution for the tasks is provided as an attached .R file. Enjoy!
 
 
 ## Introduction
 *Definition*: [Machine Learning (ML)](https://en.wikipedia.org/wiki/Machine_learning) is the study of computer algorithms that can improve automatically through experience and by the use of data. It is seen as a part of Artificial Intelligence (AI). ML algorithms build a model based on sample data, known as training data, in order to make predictions or decisions without being explicitly programmed to do so. ML algorithms are used in a wide variety of applications, such as in medicine, email filtering, speech recognition, computer vision, etc., where it is difficult or unfeasible to develop conventional algorithms to perform the needed tasks.
 
-The major application is [*Classification*](https://en.wikipedia.org/wiki/Statistical_classification).
+The major application is [*classification*](https://en.wikipedia.org/wiki/Statistical_classification).
 
 There are two basic types of ML: supervised and unsupervised. Unsupervised ML discover patterns of data similarity, whereas algorithms of supervised ML train and optimize Machines on a subset of data with known class labels in order to predict class of the new unlabeled data.
 
@@ -55,7 +55,7 @@ library(caret)
 
 Set the working directory, where will be saved output figures:
 ```r
-setwd(" … <<a path to the newly created folder>> … ")
+setwd(" … <<<a path to the newly created folder>>> … ")
 ```
 
 Load the iris dataset:
@@ -90,7 +90,7 @@ png(filename = "featurePlot_Box.png", width = 15, height = 15, units = "cm", res
 featurePlot(x=iris[,1:4], y=iris$Species, plot = "box", scales = scales, par.strip.text=list(cex=0.6))
 dev.off()
 
-png(filename = "featurePlot_Density.png", width = … <<set the arguments the same as above, plus this one more:>> …, auto.key=list(columns=3))
+png(filename = "featurePlot_Density.png", width = … <<<set the arguments the same as above, plus this one more:>>> …, auto.key=list(columns=3))
 dev.off()
 ```
 
@@ -156,9 +156,9 @@ p1 <- ggplot(df_out, aes(x=PC1, y=PC2, color=Species, label=rownames(df_out))) +
   geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
   theme_bw()
 
-p2 <- … <<x=PC1, y=PC3>> …
+p2 <- … <<<x=PC1, y=PC3>>> …
 
-p3 <- … <<x=PC2, y=PC3>> …
+p3 <- … <<<x=PC2, y=PC3>>> …
 ```
 
 Combine the three plots to one:
@@ -235,22 +235,22 @@ fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "knn", metric = me
 
 # LDA
 set.seed(7)
-fit.lda <- … <<method = "lda">> …
+fit.lda <- … <<<method = "lda">>> …
 
 # SVM Linear Kernel
-fit.knn <- … <<method = "svmLinear">> …
+fit.knn <- … <<<method = "svmLinear">>> …
 
 # SVM Radial Basis Function
-fit.knn <- … <<method = "svmRadial">> …
+fit.knn <- … <<<method = "svmRadial">>> …
 
 # DT
-fit.knn <- … <<method = "rpart">> …
+fit.knn <- … <<<method = "rpart">>> …
 
 # RF
-fit.knn <- … <<method = "rf">> …
+fit.knn <- … <<<method = "rf">>> …
 
 # ANN
-fit.knn <- … <<method = "nnet">> …
+fit.knn <- … <<<method = "nnet">>> …
 ```
 
 Note: a useful property of decisions tress is that the decisions of the machine can be followed up easily.
@@ -292,7 +292,7 @@ plot(gbmImp, main="Iris Variable Importance", top=4)
 ```
 Save the plot as .png file.
 
-**Try youself!**
+**Try yourself!**
 
 OK, you've made it! Now it’s time for your first own ML project. Load the data:
 ```r
