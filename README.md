@@ -292,7 +292,7 @@ plot(gbmImp, main="Iris Variable Importance", top=4)
 ```
 Save the plot as .png file.
 
-**Try yourself!**
+## Try yourself!
 
 OK, you've made it! Now it’s time for your first own ML project. Load the data:
 ```r
