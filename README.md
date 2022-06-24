@@ -56,7 +56,7 @@ library(caret)
 
 Set the working directory, where will be saved output figures:
 ```r
-setwd(" … <<<a path to the newly created folder>>> … ")
+setwd("<< a path to the newly created folder >>")
 ```
 
 Load the iris dataset:
@@ -91,7 +91,7 @@ png(filename = "featurePlot_Box.png", width = 15, height = 15, units = "cm", res
 featurePlot(x=iris[,1:4], y=iris$Species, plot = "box", scales = scales, par.strip.text=list(cex=0.6))
 dev.off()
 
-png(filename = "featurePlot_Density.png", width = … <<<set the arguments the same as above, plus this one more:>>> …, auto.key=list(columns=3))
+png(filename = "featurePlot_Density.png", width = … "<< set the arguments the same as above, plus this one more: >>" …, auto.key=list(columns=3))
 dev.off()
 ```
 
@@ -157,9 +157,9 @@ p1 <- ggplot(df_out, aes(x=PC1, y=PC2, color=Species, label=rownames(df_out))) +
   geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
   theme_bw()
 
-p2 <- … <<<x=PC1, y=PC3>>> …
+p2 <- … "<< x=PC1, y=PC3 >>" …
 
-p3 <- … <<<x=PC2, y=PC3>>> …
+p3 <- … "<< x=PC2, y=PC3 >>" …
 ```
 
 Combine the three plots to one:
@@ -196,11 +196,7 @@ Assign for each sample the color-coded iris species:
 ```r
 Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0, color= data_unsup$Species[Pos], angle = 45, hjust=1))
 ```
-
-Save as .png file:
-```r
-ggsave(Dendro, filename = "Dendro.png", device = "png", dpi = 600, width = 40, height = 20, units = "cm")
-```
+Save the picture as "Dendro.png" file.
 
 **Supervised Classification**
 
@@ -235,25 +231,25 @@ Training the machines:
 set.seed(7)
 
 # k-NN
-fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = "knn", metric = metric, trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
+fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = 'knn', metric = metric, trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
 
 # LDA
-fit.lda <- … <<<method = "lda">>> …
+fit.lda <- … "<< method = 'lda' >>" …
 
 # SVM Linear Kernel
-fit.knn <- … <<<method = "svmLinear">>> …
+fit.knn <- … "<< method = 'svmLinear' >>" …
 
 # SVM Radial Basis Function
-fit.knn <- … <<<method = "svmRadial">>> …
+fit.knn <- … "<< method = 'svmRadial' >>" …
 
 # DT
-fit.knn <- … <<<method = "rpart">>> …
+fit.knn <- … "<< method = 'rpart' >>" …
 
 # RF
-fit.knn <- … <<<method = "rf">>> …
+fit.knn <- … "<< method = 'rf' >>" …
 
 # ANN
-fit.knn <- … <<<method = "nnet">>> …
+fit.knn <- … "<< method = 'nnet' >>" …
 ```
 
 Note: a useful property of decisions tress is that the decisions of the machine can be followed up easily.
@@ -281,7 +277,7 @@ What is the best model in terms of Balanced Accuracy"?
 Next step: take the best machine and predict outcome for the testing dataset.
 How accurate is it?
 ```r
-predictions <- predict(<<<your best machine>>>, irisTest[,1:4])
+predictions <- predict("<< your best machine >>", irisTest[,1:4])
 
 confusionMatrix(predictions, irisTest$Species)
 ```
@@ -289,7 +285,7 @@ confusionMatrix(predictions, irisTest$Species)
 How important are the individual features for the selected machine?
 Plot the results:
 ```r
-gbmImp <- varImp(<<<your best machine>>>, scale = T)
+gbmImp <- varImp("<< your best machine >>", scale = T)
 
 plot(gbmImp, main="Iris Variable Importance", top=4)
 ```
