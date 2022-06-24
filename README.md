@@ -252,7 +252,7 @@ fit.knn <- … "<< method = 'rf' >>" …
 fit.knn <- … "<< method = 'nnet' >>" …
 ```
 
-Note: a useful property of decisions tress is that the decisions of the machine can be followed up easily.
+Note: a useful property of DT is that the decisions of the machine can be followed up easily.
 Plot the best decision tree:
 ```r
 rpart.plot(fit.cart$finalModel, type = 5)
