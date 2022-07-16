@@ -14,7 +14,7 @@ There are two basic types of ML: *supervised* and *unsupervised*. Unsupervised M
 
 **Unsupervised Machine Learning** 
 
-*Clustering*: Basically, clustering is about grouping objects/data systematically using similarity ("distance") measures (further information see: [short video](https://www.youtube.com/watch?v=QXOkPvFM6NU) and my [Practical Tutorial: Clustering](link)) 
+*Clustering*: Basically, clustering is about grouping objects/data systematically using similarity ("distance") measures (further information see: [short video](https://www.youtube.com/watch?v=QXOkPvFM6NU) and my [Practical Tutorial: Clustering](https://github.com/VSRomanov/-Tutorial_Clustering)) 
 
 *Principal component analysis (PCA)*: used for dimensionality reduction by projecting each data point onto only the first few principal components to obtain lower-dimensional data while preserving as much of the data's variation as possible (further information see: [short video](https://www.youtube.com/watch?v=FgakZw6K1QQ))
 
