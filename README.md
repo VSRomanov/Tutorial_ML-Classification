@@ -14,23 +14,23 @@ There are two basic types of ML: *supervised* and *unsupervised*. Unsupervised M
 
 **Unsupervised Machine Learning** 
 
-*Clustering*: Basically, clustering is about grouping objects/data systematically using similarity ("distance") measures (further information see: [short video](https://www.youtube.com/watch?v=QXOkPvFM6NU) and my [Practical Tutorial: Clustering](https://github.com/VSRomanov/Tutorial_Clustering)) 
+*Clustering*: Basically, clustering is about grouping objects/data systematically using similarity ("distance") measures (Further information: [short video](https://www.youtube.com/watch?v=QXOkPvFM6NU) and my [Practical Tutorial: Clustering](https://github.com/VSRomanov/Tutorial_Clustering)) 
 
-*Principal component analysis (PCA)*: used for dimensionality reduction by projecting each data point onto only the first few principal components to obtain lower-dimensional data while preserving as much of the data's variation as possible (further information see: [short video](https://www.youtube.com/watch?v=FgakZw6K1QQ))
+*Principal component analysis (PCA)*: used for dimensionality reduction by projecting each data point onto only the first few principal components to obtain lower-dimensional data while preserving as much of the data's variation as possible (Further information: [short video](https://www.youtube.com/watch?v=FgakZw6K1QQ))
 
 **Supervised Machine Learning** 
 
-*k-nearest neighbours algorithm (k-NN)*: The algorithm evaluates similarity between the new observation and available cases, and assigns the new datapoint to the class/category that is most similar to the available categories of the 'k' nearest cases. The choice of number 'k' is crucial for the quality of the results. (see: [short video](https://www.youtube.com/watch?v=HVXime0nQeI))
+*k-nearest neighbours algorithm (k-NN)*: The algorithm evaluates similarity between the new observation and available cases, and assigns the new datapoint to the class/category that is most similar to the available categories of the 'k' nearest cases. The choice of number 'k' is crucial for the quality of the results. (Further information: [short video](https://www.youtube.com/watch?v=HVXime0nQeI))
 
-*Linear discriminant analysis (LDA)*: LDA aims to find a linear combination of features that characterizes or separates two (or more) classes of objects/observations. Therefore, it reduces dimensions systematically. (see: [short video](https://www.youtube.com/watch?v=azXCzI57Yfc))
+*Linear discriminant analysis (LDA)*: LDA aims to find a linear combination of features that characterizes or separates two (or more) classes of objects/observations. Therefore, it reduces dimensions systematically. (Further information: [short video](https://www.youtube.com/watch?v=azXCzI57Yfc))
 
-*Support vector machine (SVM)*: SVM maps training examples to points in space and constructs a hyperplane so that the distance from it to the nearest data point on each side is maximized. A good separation is achieved by the hyperplane that has the largest distance to the nearest training-data point of any class. Kernel trick: the method maps a non-linear separable data into a higher dimensional space, making the data linearly separable. (see: [short video](https://www.youtube.com/watch?v=efR1C6CvhmE))
+*Support vector machine (SVM)*: SVM maps training examples to points in space and constructs a hyperplane so that the distance from it to the nearest data point on each side is maximized. A good separation is achieved by the hyperplane that has the largest distance to the nearest training-data point of any class. Kernel trick: the method maps a non-linear separable data into a higher dimensional space, making the data linearly separable. (Further information: [short video](https://www.youtube.com/watch?v=efR1C6CvhmE))
 
-*Decision tree (DT)*: Structure in which each internal node represents a "test" on a feature (e.g. Petal Width > 1), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after testing all corresponding features). The paths from root to leaf represent classification rules. (see: [short video](https://www.youtube.com/watch?v=7VeUPuFGJHk))
+*Decision tree (DT)*: Structure in which each internal node represents a "test" on a feature (e.g. Petal Width > 1), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after testing all corresponding features). The paths from root to leaf represent classification rules. (Further information: [short video](https://www.youtube.com/watch?v=7VeUPuFGJHk))
 
-*Random forest (RF)*: A set of decision trees each calculated using a bootstrapped dataset and a random subset of features at each decision step. The variety is what makes RF more effective than individual decision tress. For classification, the data is passed through all the created trees. The class label is assigned to the one with the most votes. (see: [short video](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ))
+*Random forest (RF)*: A set of decision trees each calculated using a bootstrapped dataset and a random subset of features at each decision step. The variety is what makes RF more effective than individual decision tress. For classification, the data is passed through all the created trees. The class label is assigned to the one with the most votes. (Further information: [short video](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ))
 
-*Artificial neural network (ANN)*: An ANN is based on a collection of connected nodes called neurons. The neurons are connected via channels and are grouped in different layers. The input layer receives the input, the output layer predicts the output and the hidden layers between them perform the main part of the calculation. Within the training phase the weights assigned to the channels are adjusted to improve the prediction of the output layer. For classification, the data is propagated through the neural net using the weights and functions calculated in the training phase. The class label is assigned to the one with highest score (probability) in the output layer. (see: [short video 1](https://www.youtube.com/watch?v=bfmFfD2RIcg); [short video 2](https://www.youtube.com/watch?v=aircAruvnKk))
+*Artificial neural network (ANN)*: An ANN is based on a collection of connected nodes called neurons. The neurons are connected via channels and are grouped in different layers. The input layer receives the input, the output layer predicts the output and the hidden layers between them perform the main part of the calculation. Within the training phase the weights assigned to the channels are adjusted to improve the prediction of the output layer. For classification, the data is propagated through the neural net using the weights and functions calculated in the training phase. The class label is assigned to the one with highest score (probability) in the output layer. (Further information: [short video 1](https://www.youtube.com/watch?v=bfmFfD2RIcg); [short video 2](https://www.youtube.com/watch?v=aircAruvnKk))
 
 ## Practical Part
 
@@ -85,13 +85,13 @@ iris$ID <- as.character(rownames(iris))
 
 Plot a boxplot and a density histogram of the iris data for each species. Save them as .png files:
 ```r
-scales <- list(x=list(relation="free"), y=list(relation="free"))
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
 
 png(filename = "featurePlot_Box.png", width = 15, height = 15, units = "cm", res = 300)
-featurePlot(x=iris[,1:4], y=iris$Species, plot = "box", scales = scales, par.strip.text=list(cex=0.6))
+featurePlot(x = iris[,1:4], y = iris$Species, plot = "box", scales = scales, par.strip.text = list(cex = 0.6))
 dev.off()
 
-png(filename = "featurePlot_Density.png", width = … "<< set the arguments the same as above, plus this one more: >>" …, auto.key=list(columns=3))
+png(filename = "featurePlot_Density.png", width = … "<< set the arguments the same as above, plus this one more: >>" …, auto.key = list(columns = 3))
 dev.off()
 ```
 
@@ -101,7 +101,7 @@ In order to test and see how good our classification performs, we will mask the 
 Split the dataset 70/30:
 ```r
 set.seed(9)
-indices <- createDataPartition(iris$Species, p=0.7, list = F)
+indices <- createDataPartition(iris$Species, p = 0.7, list = F)
 ```
 
 70% of the data with class labels:
@@ -129,14 +129,14 @@ pca <- prcomp(data_unsup[,1:4], center = T, scale. = T)
 What kind of objects is 'pca'?
 ```r
 class(pca)
-is.list(pca) 
+is.list(pca)
 ```
 
 Get the variances explained by each principal component and save the plot as a .png file:
 ```r
 png(filename = "Scree.Plot.png", width = 12, height = 12, units = "cm", res = 300)
 factoextra::fviz_eig(pca, addlabels = T)
-dev.off() 
+dev.off()
 ```
 
 Get the PCA results:
@@ -152,19 +152,19 @@ df_out$Species <- as.character(data_unsup[,5])
 
 Plot the PCA results:
 ```r
-p1 <- ggplot(df_out, aes(x=PC1, y=PC2, color=Species, label=rownames(df_out))) +
+p1 <- ggplot(df_out, aes(x = PC1, y = PC2, color = Species, label = rownames(df_out))) +
   geom_point() +
-  geom_text(aes(label=rownames(df_out)), hjust=0, vjust=0) +
+  geom_text(aes(label = rownames(df_out)), hjust = 0, vjust = 0) +
   theme_bw()
 
-p2 <- … "<< x=PC1, y=PC3 >>" …
+p2 <- … "<< x = PC1, y = PC3 >>" …
 
-p3 <- … "<< x=PC2, y=PC3 >>" …
+p3 <- … "<< x = PC2, y = PC3 >>" …
 ```
 
 Combine the three plots to one:
 ```r
-pFin <- grid.arrange(p1,p2,p3, ncol=2)
+pFin <- grid.arrange(p1, p2, p3, ncol = 2)
 ```
 
 Save PCA plot as .png file:
@@ -189,12 +189,13 @@ labs <- label(ddata_x)
 Get each ID in the tree and find its position in the original data:
 ```r
 ID <- as.numeric(as.character(labs$label))
-Pos <- sapply(as.character(ID), function(x) which(x==as.character(data_unsup$ID)))
+Pos <- sapply(as.character(ID), function(x) which(x == as.character(data_unsup$ID)))
 ```
 
 Assign for each sample the color-coded iris species:
 ```r
-Dendro <- dendr + geom_text(data = label(ddata_x), aes(label=label, x=x, y=0, color= data_unsup$Species[Pos], angle = 45, hjust=1))
+Dendro <- dendr +
+  geom_text(data = label(ddata_x), aes(label = label, x = x, y = 0, color = data_unsup$Species[Pos], angle = 45, hjust = 1))
 ```
 Save the picture as "Dendro.png" file.
 
@@ -214,7 +215,7 @@ we will split the data in 70% and 30%, train with 70% of the data and test with 
 ```r
 set.seed(9)
 
-training_indices <- createDataPartition(iris$Species, p=0.7, list = F)
+training_indices <- createDataPartition(iris$Species, p = 0.7, list = F)
 irisTrain <- iris[training_indices,]
 irisTest <- iris[-training_indices,]
 ```
@@ -231,7 +232,7 @@ Training the machines:
 set.seed(7)
 
 # k-NN
-fit.knn <- train(x=irisTrain[,1:4], y=irisTrain[,5], method = 'knn', metric = metric, trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
+fit.knn <- train(x = irisTrain[,1:4], y = irisTrain[,5], method = 'knn', metric = metric, trControl = control, tuneLength = 10, preProcess = c("center", "scale"))
 
 # LDA
 fit.lda <- … "<< method = 'lda' >>" …
@@ -260,16 +261,16 @@ rpart.plot(fit.cart$finalModel, type = 5)
 
 Summarize ML performance:
 ```r
-results <- resamples(list(lda=fit.lda, knn=fit.knn, svm_Lin=fit.svm_Lin, svm_Rad=fit.svm_Rad, rf=fit.rf, cart=fit.cart, nnet=fit.nnet))
+results <- resamples(list(lda = fit.lda, knn = fit.knn, svm_Lin = fit.svm_Lin, svm_Rad = fit.svm_Rad, rf = fit.rf, cart = fit.cart, nnet = fit.nnet))
 summary(results)
 ```
 
 Plot the comparison of models and save it as .png file:
 ```r
-scales <- list(x=list(relation="free"), y=list(relation="free"))
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
 
 png(filename = "ML_performance.png", width = 20, height = 20, units = "cm", res = 300)
-dotplot(results, scales=scales, par.strip.text=list(cex=0.76), par.settings = list(par.xlab.text = list(cex = 0)))
+dotplot(results, scales = scales, par.strip.text = list(cex = 0.76), par.settings = list(par.xlab.text = list(cex = 0)))
 dev.off()
 ```
 What is the best model in terms of Balanced Accuracy"?
@@ -287,7 +288,7 @@ Plot the results:
 ```r
 gbmImp <- varImp("<< your best machine >>", scale = T)
 
-plot(gbmImp, main="Iris Variable Importance", top=4)
+plot(gbmImp, main = "Iris Variable Importance", top = 4)
 ```
 Save the plot as .png file.
 
